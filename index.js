@@ -13,8 +13,31 @@ admin.initializeApp({
 
 app.post('/', (req, res) => {
 	const payload = req.body;
+	console.log("from dev.dyte.io:-");
 	console.log(payload);
 	res.status(200).send('Success')
+})
+
+app.post("/onInitMeeting", (req, res) => {
+	const {meeting, contact, caller} = req.body;
+	console.log({meeting, contact, caller});
+
+	const message = {
+		data: {meeting, contact, caller},
+		topic: 'activeMeeting',
+	};
+
+	admin
+		.messaging()
+		.send(message)
+		.then(response => {
+			console.log('Successfully sent message:', response);
+		})
+		.catch(error => {
+			console.log('Error sending message:', error);
+		});
+
+	res.json({success: true})
 })
 
 app.listen(process.env.PORT || 3000)
