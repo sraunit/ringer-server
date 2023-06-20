@@ -22,8 +22,12 @@ app.post("/onInitMeeting", (req, res) => {
 	const {meeting, contact, caller} = req.body;
 	console.log({meeting, contact, caller});
 
+	const data = JSON.stringify({meeting, contact, caller});
+
+	console.log("data is: " + JSON.stringify({meeting, contact, caller}));
+
 	const message = {
-		data: JSON.stringify({meeting, contact, caller}),
+		data,
 		topic: 'activeMeeting',
 	};
 
