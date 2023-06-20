@@ -12,9 +12,6 @@ admin.initializeApp({
 });
 
 app.post('/', (req, res) => {
-	const payload = req.body;
-	console.log("from dev.dyte.io:-");
-	console.log(payload);
 	res.status(200).send('Success')
 })
 
@@ -34,12 +31,12 @@ app.post("/onInitMeeting", (req, res) => {
 		.send(message)
 		.then(response => {
 			console.log('Successfully sent message:', response);
+			res.json({success: true});
 		})
 		.catch(error => {
 			console.log('Error sending message:', error);
+			res.json({success: false});
 		});
-
-	res.json({success: true})
 })
 
 app.listen(process.env.PORT || 3000)
